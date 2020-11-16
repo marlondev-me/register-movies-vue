@@ -1,28 +1,53 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <b-container class="text-center">
+      <h1>Cadastro de Filmes</h1>
+    </b-container>
+    <div>
+    <b-tabs content-class="mt-3">
+      <b-tab title="Lista de Filmes" active>
+        <list :listdata="movies"/>
+      </b-tab>
+      <b-tab title="Cadastro">
+          <register @registerMovie="getRegisterMovie"/>
+      </b-tab>
+    </b-tabs>
+  </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import List from '@/views/List';
+  import Register from '@/views/Register';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    data: () =>{
+      return {
+        movies: [
+          {
+            'name': 'Deadpool',
+            'note': 5,
+          },
+          {
+            'name': 'Lanterna Verde',
+            'note': 1,
+          }
+        ]
+      }
+    },
+    name: "App",
+    components: {
+      'list':List,
+      'register':Register,
+    },
+
+    methods: {
+      getRegisterMovie(movie){
+        this.movies.push(movie);
+        console.log(this.movies);
+      }
+    }
+  };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
